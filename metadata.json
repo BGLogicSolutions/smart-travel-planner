@@ -1,0 +1,6 @@
+{
+  "name": "Intelligent Travel Planner",
+  "description": "An AI-powered smart itinerary generator for personalized travel plans based on destination, days, and budget.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
