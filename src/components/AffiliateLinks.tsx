@@ -1,55 +1,46 @@
-import { Plane, Building, ExternalLink } from 'lucide-react';
+import { ExternalLink, Hotel, Plane } from 'lucide-react';
 
-interface AffiliateLinksProps {
+interface Props {
   destination: string;
-  bookingId: string;
-  skyscannerId: string;
+  bookingId?: string;
+  skyscannerId?: string;
 }
 
-export function AffiliateLinks({ destination, bookingId, skyscannerId }: AffiliateLinksProps) {
-  const encodedDest = encodeURIComponent(destination);
-  
-  const finalBookingId = bookingId || "TU_ID_AQUI";
-  const finalSkyscannerId = skyscannerId || "TU_ID_AQUI";
+export function AffiliateLinks({ destination, bookingId, skyscannerId }: Props) {
+  const bookingUrl = bookingId
+    ? `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(destination)}&aid=${bookingId}`
+    : `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(destination)}`;
+  const skyscannerUrl = skyscannerId
+    ? `https://www.skyscanner.net/transport/flights/${encodeURIComponent(destination)}?ad=${skyscannerId}`
+    : `https://www.skyscanner.net/transport/flights/${encodeURIComponent(destination)}`;
 
   return (
-    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-lg">
-      <h3 className="text-lg font-display font-bold text-white mb-4">Servicios Recomendados</h3>
-      <p className="text-sm text-slate-400 mb-6">Completa tu reserva con nuestros socios de confianza.</p>
-
-      <div className="space-y-4">
-        {/* Hotel Affiliate Link */}
-        <a 
-          href={`https://www.booking.com/searchresults.es.html?ss=${encodedDest}&aid=${finalBookingId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-4 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 rounded-2xl p-4 transition-all group"
-        >
-          <div className="bg-indigo-500 rounded-xl p-2.5 text-white shadow-lg shadow-indigo-500/20">
-            <Building className="w-5 h-5" />
-          </div>
-          <div className="flex-1">
-            <h4 className="text-white font-bold text-sm group-hover:text-indigo-400 transition-colors">Hoteles en {destination}</h4>
-            <p className="text-xs text-slate-400">Encuentra los mejores alojamientos (Booking) ↗</p>
-          </div>
-        </a>
-
-        {/* Flight Affiliate Link */}
-        <a 
-          href={`https://www.skyscanner.net/transport/flights/es/es?destinationName=${encodedDest}&associateid=${finalSkyscannerId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-4 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/20 rounded-2xl p-4 transition-all group"
-        >
-          <div className="bg-cyan-500 rounded-xl p-2.5 text-white shadow-lg shadow-cyan-500/20">
-            <Plane className="w-5 h-5" />
-          </div>
-          <div className="flex-1">
-            <h4 className="text-white font-bold text-sm group-hover:text-cyan-400 transition-colors">Vuelos Baratos</h4>
-            <p className="text-xs text-slate-400">Compara precios aéreos (Skyscanner) ↗</p>
-          </div>
-        </a>
-      </div>
+    <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 shadow-lg space-y-4">
+      <h3 className="text-sm font-semibold text-white">Reserva con los mejores</h3>
+      <a
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-between px-4 py-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Hotel className="w-4 h-4 text-blue-400" />
+          <span className="text-sm text-slate-200">Hoteles en {destination}</span>
+        </div>
+        <ExternalLink className="w-4 h-4 text-slate-400" />
+      </a>
+      <a
+        href={skyscannerUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-between px-4 py-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Plane className="w-4 h-4 text-cyan-400" />
+          <span className="text-sm text-slate-200">Vuelos</span>
+        </div>
+        <ExternalLink className="w-4 h-4 text-slate-400" />
+      </a>
     </div>
   );
 }
