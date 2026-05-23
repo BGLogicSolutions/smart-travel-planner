@@ -1,46 +1,19 @@
 import { MapPin } from 'lucide-react';
 
-interface MapPlaceholderProps {
+interface Props {
   destination: string;
 }
 
-export function MapPlaceholder({ destination }: MapPlaceholderProps) {
-  // Using an iframe with OpenStreetMap as a free, no-API-key alternative 
-  // embedded search for visual realism, as requested "Simulado/Instrucciones de API".
-  // In a real production app, you would replace this with the Google Maps Javascript API
-  // and your API Key.
-  
-  const encodedDest = encodeURIComponent(destination);
-  
+export function MapPlaceholder({ destination }: Props) {
   return (
-    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-lg h-64 md:h-80 relative">
-      {/* 
-        NOTA PARA EL DESARROLLADOR: 
-        Para usar Google Maps, reemplaza este iframe con:
-        <iframe
-           width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen
-           src={"https://www.google.com/maps/embed/v1/place?key=TU_API_KEY_AQUI&q=" + encodedDest}>
-        </iframe>
-      */}
-      <iframe 
-        width="100%" 
-        height="100%" 
-        style={{ border: 0 }} 
-        src={`https://www.openstreetmap.org/export/embed.html?bbox=-180,-90,180,90&layer=mapnik&marker=0,0`} // Very basic fallback. Better approach is generic search or just a stylized placeholder.
-        className="absolute inset-0 z-0 opacity-50 grayscale mix-blend-overlay pointer-events-none"
-      />
-      
-      {/* Stylized overlay that fits the "Frosted Glass" theme */}
-      <div className="absolute inset-0 bg-indigo-900/40 z-10 flex flex-col items-center justify-center p-4 text-center">
-         <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mb-3 shadow-lg shadow-indigo-500/50">
-            <MapPin className="w-6 h-6 text-white" />
-         </div>
-         <h4 className="text-white font-bold text-lg mb-1">{destination}</h4>
-         <p className="text-indigo-200 text-xs uppercase tracking-widest font-semibold">Vista de Mapa (Simulada)</p>
-         
-         <div className="mt-4 px-4 py-2 bg-slate-900/80 backdrop-blur-sm border border-white/10 rounded-lg text-xs text-slate-300">
-            Integración lista para Google Maps API
-         </div>
+    <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/10 shadow-lg text-center">
+      <div className="flex justify-center mb-2">
+        <MapPin className="w-10 h-10 text-indigo-400" />
+      </div>
+      <h4 className="text-sm font-semibold text-white mb-1">{destination}</h4>
+      <p className="text-xs text-slate-400">Mapa interactivo próximamente</p>
+      <div className="mt-3 bg-white/5 rounded-xl p-4 text-xs text-slate-500">
+        Integración Google Maps próximamente
       </div>
     </div>
   );
