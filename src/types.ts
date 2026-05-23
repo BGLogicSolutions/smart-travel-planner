@@ -1,15 +1,12 @@
-export type BudgetLevel = 'Bajo' | 'Medio' | 'Alto';
-export type TripType = 'Aventura' | 'Familiar' | 'Relajación';
-
 export interface TravelRequest {
   destination: string;
   days: number;
-  budget: BudgetLevel;
-  tripType: TripType;
+  budget: 'bajo' | 'medio' | 'alto';
+  tripType: 'Aventura' | 'Familiar' | 'Relajación';
   geminiApiKey?: string;
 }
 
-export interface DailyPlan {
+export interface DayPlan {
   dayNumber: number;
   morning: string;
   lunch: string;
@@ -17,13 +14,13 @@ export interface DailyPlan {
   night: string;
 }
 
-export interface TravelTips {
+export interface Tips {
   transport: string;
   safeZones: string;
   commonScam: string;
 }
 
 export interface ItineraryResponse {
-  days: DailyPlan[];
-  tips: TravelTips;
+  days: DayPlan[];
+  tips: Tips;
 }
