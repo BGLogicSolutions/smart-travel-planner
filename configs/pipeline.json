@@ -1,0 +1,21 @@
+{
+  "league": "nba",
+  "season": "2025-2026",
+  "windows": {
+    "train_start": "2023-10-01",
+    "train_end": "2026-04-15",
+    "validation_weeks": 6
+  },
+  "hyperparameters": {
+    "model": "xgboost",
+    "learning_rate": 0.05,
+    "max_depth": 6,
+    "n_estimators": 300
+  },
+  "paths": {
+    "raw": "data/raw",
+    "processed": "data/processed",
+    "features": "data/features",
+    "models": "artifacts/models"
+  }
+}
